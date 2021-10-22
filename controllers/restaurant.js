@@ -148,7 +148,13 @@ const deleteRestaurant = async (req, res) => {
     res.status(500).send(error);
   }
 };
-
+(async () => {
+  await pool.query(`create table restaurants(id bigserial not null primary key,
+    name varchar(50) not null,
+    location varchar(50) not null,
+    proce_range int not null check(price_range >=1 and price_range <=5)
+    );`);
+})();
 module.exports = {
   getRestaurants,
   getRestaurantById,

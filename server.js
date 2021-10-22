@@ -9,9 +9,6 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-app.use(express.static(path.join(__dirname, "/client/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
+
 const port = process.env.PORT || 3001;
 app.listen(`${port}`, console.log("Server up"));
