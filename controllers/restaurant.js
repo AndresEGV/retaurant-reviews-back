@@ -152,7 +152,7 @@ const deleteRestaurant = async (req, res) => {
   await pool.query(`create table restaurants(id bigserial not null primary key,
     name varchar(50) not null,
     location varchar(50) not null,
-    proce_range int not null check(price_range >=1 and price_range <=5)
+    price_range int not null check(price_range >=1 and price_range <=5)
     );`);
 })();
 module.exports = {
