@@ -150,11 +150,16 @@ const deleteRestaurant = async (req, res) => {
   }
 };
 (async () => {
-  await pool.query(`create table restaurants(id bigserial not null primary key,
-    name varchar(50) not null,
-    location varchar(50) not null,
-    price_range int not null check(price_range >=1 and price_range <=5)
-    );`);
+  await pool.query(`CREATE TABLE reviews (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    restaurant_id BIGINT NOT NULL REFERENCES restaurants(id) on delete cascade,
+    name VARCHAR(50) NOT NULL,
+    review TEXT NOT NULL,
+    rating INT NOT NULL check(
+        rating >= 1
+        and rating <= 5
+    )
+);`);
 })();
 module.exports = {
   getRestaurants,
